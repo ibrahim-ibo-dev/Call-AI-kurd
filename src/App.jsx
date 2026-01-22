@@ -341,7 +341,10 @@ function App() {
     setLoading(true)
 
     try {
-      const { resp, text, data } = await postJson('/api/send_message', { message: clean })
+      const { resp, text, data } = await postJson('/api/send_message', {
+        message: clean,
+        character: currentCharacterId,
+      })
 
       if (!resp.ok) {
         const msg = data?.error ? String(data.error) : text || `HTTP ${resp.status}`
