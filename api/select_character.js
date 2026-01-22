@@ -8,14 +8,16 @@ import {
 } from './_shared.js';
 
 export default async function handler(req, res) {
-  if (req.method !== 'POST') {
+  if (req.method !== 'POST' && req.method !== 'GET') {
     res.status(405).json({ success: false, error: 'Method not allowed' });
     return;
   }
 
   try {
-    const body = await readJsonBody(req);
-    const characterId = String(body?.character ?? '');
+    const body = req.method === 'POST' ? await readJsonBody(req) : {};
+    const characterId = String(
+      body?.character ?? req.query?.character ?? req.query?.id ?? '',
+    );
     const character = getSelectedCharacter(characterId);
 
     if (!character) {
