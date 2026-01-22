@@ -16,8 +16,12 @@ export default async function handler(req, res) {
     const body = await readJsonBody(req);
     const userMessage = String(body?.message ?? '').trim();
     const session = getSession(req, res);
-    const characterId = String(session.selected_character ?? body?.character ?? '').trim();
-    if (characterId) {
+    const bodyCharacterId = String(body?.character ?? '').trim();
+    const characterId = String(session.selected_character ?? bodyCharacterId ?? '').trim();
+    if (bodyCharacterId && bodyCharacterId !== session.selected_character) {
+      session.selected_character = bodyCharacterId;
+      session.conversation_history = [];
+    } else if (characterId) {
       session.selected_character = characterId;
     }
     const character = getSelectedCharacter(characterId);
