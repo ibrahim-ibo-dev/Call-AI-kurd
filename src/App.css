@@ -229,7 +229,7 @@
 }
 
 .conversation {
-  background: rgba(8, 12, 20, 0.55);
+  background: rgba(6, 10, 18, 0.7);
   border-radius: 22px;
   padding: 14px 14px 18px;
   overflow-y: auto;
@@ -310,12 +310,17 @@
 
 .text-input-section input {
   flex: 1;
-  border: none;
+  border: 1px solid rgba(255, 255, 255, 0.12);
   border-radius: 14px;
   padding: 12px 14px;
   outline: none;
   font-size: 0.98rem;
-  background: rgba(255, 255, 255, 0.9);
+  background: rgba(255, 255, 255, 0.96);
+  color: #1b1f28;
+}
+
+.text-input-section input::placeholder {
+  color: #8a93a8;
 }
 
 .send-text-btn {
